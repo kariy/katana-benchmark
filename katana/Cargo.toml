@@ -1,11 +1,12 @@
 [package]
-edition.workspace = true
+edition = "2021"
 name = "katana"
-version.workspace = true
+version = "0.1.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+cairo-lang-starknet = ">= 2.4.0, <= 2.5.0-dev.1"
 
 [dependencies.katana-db]
 git = "https://github.com/dojoengine/dojo.git"

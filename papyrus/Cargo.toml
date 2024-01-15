@@ -1,13 +1,22 @@
 [package]
-edition.workspace = true
+edition = "2021"
 name = "papyrus"
-version.workspace = true
+version = "0.1.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+
 [dependencies]
+blockifier = "0.5.0-dev.0"
+cairo-lang-starknet = ">= 2.4.0, <= 2.5.0-dev.1"
 serde_json.workspace = true
 
 [dependencies.papyrus_storage]
 git = "https://github.com/starkware-libs/papyrus.git"
-tag = "v0.2.0"
+rev = "bd333e"
+
+[dependencies.papyrus_test_utils]
+git = "https://github.com/starkware-libs/papyrus.git"
+package = "test_utils"
+rev = "bd333e"
