@@ -1,0 +1,13 @@
+[package]
+edition.workspace = true
+name = "papyrus"
+version.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde_json.workspace = true
+
+[dependencies.papyrus_storage]
+git = "https://github.com/starkware-libs/papyrus.git"
+tag = "v0.2.0"
