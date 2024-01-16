@@ -7,14 +7,23 @@ fn serde_compiled_contract_class(casm: CasmContractClass) -> CompiledContractCla
     deserialize_compiled_class(serialize_casm(casm))
 }
 
-fn storage_serde(c: &mut Criterion) {
+fn contract_class_serde(c: &mut Criterion) {
     let sierra_class = include_str!("../../resources/sierra/dojo_world_240.json");
     let casm = parse_contract_class(sierra_class);
+    let serialized_casm = serialize_casm(casm.clone());
 
-    c.bench_function("contract class", |b| {
+    c.bench_function("serialize contract class", |b| {
+        b.iter_with_large_drop(|| serialize_casm(black_box(casm.clone())))
+    });
+
+    c.bench_function("deserialize contract class", |b| {
+        b.iter_with_large_drop(|| deserialize_compiled_class(black_box(serialized_casm.clone())))
+    });
+
+    c.bench_function("full serde contract class", |b| {
         b.iter_with_large_drop(|| serde_compiled_contract_class(black_box(casm.clone())))
     });
 }
 
-criterion_group!(serde, storage_serde);
-criterion_main!(serde);
+criterion_group!(storage_serde, contract_class_serde);
+criterion_main!(storage_serde);

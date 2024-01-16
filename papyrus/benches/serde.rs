@@ -10,6 +10,17 @@ fn serde_compiled_contract_class(casm: CasmContractClass) -> CompiledContractCla
 fn storage_serde(c: &mut Criterion) {
     let sierra_class = include_str!("../../resources/sierra/dojo_world_240.json");
     let casm = parse_contract_class(sierra_class);
+    let serialized_casm = serialize_casm(casm.clone());
+
+    c.bench_function("serialize contract class", |b| {
+        b.iter_with_large_drop(|| serialize_casm(black_box(casm.clone())))
+    });
+
+    c.bench_function("deserialize contract class", |b| {
+        b.iter_with_large_drop(|| {
+            deserialize_casm_buffer_as_compiled_contract(black_box(serialized_casm.clone()))
+        })
+    });
 
     c.bench_function("contract class", |b| {
         b.iter_with_large_drop(|| serde_compiled_contract_class(black_box(casm.clone())))
