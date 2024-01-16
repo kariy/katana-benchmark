@@ -16,7 +16,7 @@ pub fn serialize_casm(casm: CasmContractClass) -> Vec<u8> {
     buf
 }
 
-pub fn deserialize_casm(buf: Vec<u8>) -> CompiledContractClass {
+pub fn deserialize_casm_buffer_as_compiled_contract(buf: Vec<u8>) -> CompiledContractClass {
     let casm: CasmContractClass = StorageSerde::deserialize_from(&mut buf.as_slice()).unwrap();
     CompiledContractClass::V1(ContractClassV1::try_from(casm).unwrap())
 }

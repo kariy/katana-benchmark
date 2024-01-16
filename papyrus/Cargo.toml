@@ -9,14 +9,18 @@ version = "0.1.0"
 
 [dependencies]
 blockifier = "0.5.0-dev.0"
-cairo-lang-starknet = ">= 2.4.0, <= 2.5.0-dev.1"
-serde_json.workspace = true
-
-[dependencies.papyrus_storage]
-git = "https://github.com/starkware-libs/papyrus.git"
-rev = "bd333e"
+cairo-lang-starknet = "=2.5.0-dev.1"
+papyrus_storage = { git = "https://github.com/starkware-libs/papyrus.git", rev = "bd333e" }
+serde_json = "1.0.111"
 
 [dependencies.papyrus_test_utils]
 git = "https://github.com/starkware-libs/papyrus.git"
 package = "test_utils"
 rev = "bd333e"
+
+[dev-dependencies]
+criterion = "0.5.1"
+
+[[bench]]
+harness = false
+name = "serde"
